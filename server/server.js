@@ -1,10 +1,13 @@
-require('dotenv').config();
-const cors = require('cors');
-const express = require('express');
+import express from 'express'
+import cors from 'cors'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-const { default: mongoose } = require('mongoose');
+
 
 
 
@@ -18,7 +21,27 @@ app.get('/api/recipes' , (req , res) => {
 
 
 
+// _____ Connect to the Database _____ //
+const ConnectToDatabase = async () =>{
+    try{
+        mongoose.set('strictQuery' , false);
+        await mongoose.connect(process.env.MONGO_URL)
+        console.log('Database Succesfully Connected.');
+    }catch(error){
+        console.log('Database Connection Failed');
+    }
+    console.log('-----------------------------------------------------');
+}
+
+// _____ Server Starts Listening _____ //
 const PORT = process.env.PORT;
-app.listen(PORT , () => {
-    console.log(`Server is listening on port ${PORT}..`);
-})
+function Server(){
+    ConnectToDatabase();
+    app.listen(PORT, ()=>{
+        console.log('-----------------------------------------------------');
+        console.log(`Server is listening on port ${PORT}..`);
+        console.log('-----------------------------------------------------');
+        
+    });
+}
+Server();
