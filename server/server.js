@@ -2,14 +2,17 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import {userRouter} from './routes/users.js'
 
+//____ Middleware ____ //
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/auth' ,userRouter);
 
 
-
+//_____  Dummy Routes _____ //
 
 app.get('/' , (req , res) => {
     res.status(200).send('Recipe App');
@@ -18,8 +21,6 @@ app.get('/' , (req , res) => {
 app.get('/api/recipes' , (req , res) => {
     res.status(200).send('Recipes');
 })
-
-
 
 // _____ Connect to the Database _____ //
 const ConnectToDatabase = async () =>{
