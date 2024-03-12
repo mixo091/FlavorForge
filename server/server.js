@@ -3,6 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import {userRouter} from './routes/users.js'
+import {recipesRouter} from './routes/recipes.js'
 
 //____ Middleware ____ //
 dotenv.config();
@@ -10,11 +11,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/auth' ,userRouter);
+app.use('/recipes', recipesRouter);
 
 
 //_____  Dummy Routes _____ //
 
-app.get('/' , (req , res) => {
+app.post('/' , (req , res) => {
     res.status(200).send('Recipe App');
 })
 
@@ -33,6 +35,8 @@ const ConnectToDatabase = async () =>{
     }
     console.log('-----------------------------------------------------');
 }
+
+
 
 // _____ Server Starts Listening _____ //
 const PORT = process.env.PORT;

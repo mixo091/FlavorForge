@@ -1,0 +1,10 @@
+.home-page {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .recipe-grid {
+    display: grid;
+    gap: 20px; 
+    grid-template-columns: repeat(4, 1fr);
+  }
