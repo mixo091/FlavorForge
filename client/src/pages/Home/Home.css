@@ -1,10 +1,12 @@
 .home-page {
+    margin:10vh;
+    padding-top: 25px;
     display: flex;
     justify-content: center;
   }
   
   .recipe-grid {
     display: grid;
-    gap: 20px; 
+    gap: 30px; 
     grid-template-columns: repeat(4, 1fr);
   }
